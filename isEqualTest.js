@@ -3,8 +3,10 @@ const { isEqual } = require("./isEqual");
 const primitiveTestCases = {
     type: "primitiveTestCases",
     cases: [
-        ["Same Numbers", 1, 1, true],
-        ["diff Numbers", 1, 0, false],
+        ["Positive Same Numbers", 1, 1, true],
+        ["Negative Same Numbers", -10, -10, true],
+        ["diff Positive Numbers", 1, 0, false],
+        ["one NAN", NaN, 0, false],
         ["Strings", "a", "a", true],
         ["both undefined", undefined, undefined, true],
         ["both not undefined", 10, undefined, false],
@@ -19,8 +21,8 @@ const primitiveTestCases = {
 const arrayTestCases = {
     type: "arrayTestCases",
     cases: [
-        ["Empty Array", [], [], true],
         ["same Length", [1], [1], true],
+        ["Empty Array", [], [], true],
         ["diff length more in b", [1], [1, 2], false],
         ["diff length more in a", [1, 2], [1], false],
         ["diff length ,one empty", [], [1, 2], false],
@@ -37,23 +39,29 @@ const nestedArrayTestCases = {
     ]
 }
 
-const testCases = [
-    [1, 1, true],
-    ["a", "a", true],
-    [1, "1", false],
+const objectTestCases = {
+    type: "objectTestCases",
+    cases: [
+        ["Empty objects", {}, {}, true],
+        ["one object", { a: 1 }, {}, false],
+        ["same obj", { a: 1 }, { a: 1 }, true],
+        ["diff obj", { a: 1 }, { a: 2 }, false],
+        ["reversed obj", { a: 1, b: 2 }, { b: 2, a: 1 }, true],
+    ]
+}
 
-    [[], [], true],
-    [[1], [1], true],
-    [[1], [1, 2], false],
-
-    [{ a: 1 }, { a: 1 }, true],
-    [{ a: 1 }, { b: 1 }, false],
-    [{ a: [1] }, { a: [1] }, true],
-    [{ a: { b: 1 } }, { a: { b: 1 } }, true],
-    [{ a: 1, b: 2 }, { a: 1, b: 2 }, true],
-];
+const nestedObjectTestCases = {
+    type: "nestedObjectTestCases",
+    cases: [
+        ["same obj in array", [{ a: [1] }], [{ a: [1] }], true],
+        ["same array in obj", { a: [1] }, { a: [1] }, true],
+        ["diff obj in array", [{ a: [1] }], [{ a: [1], b: 2 }], false],
+        ["diff array in obj", { a: [1] }, { a: [1], b: [2] }, false],
+    ]
+}
 
 function runTests(testCases) {
+    console.log();
     console.log(testCases.type);
 
     for (const [description, first, second, expected] of testCases.cases) {
@@ -64,9 +72,10 @@ function runTests(testCases) {
             console.log(`❌`, description);
         }
     }
-    console.log();
 }
 
 runTests(primitiveTestCases);
 runTests(arrayTestCases);
 runTests(nestedArrayTestCases);
+runTests(objectTestCases);
+runTests(nestedObjectTestCases);
