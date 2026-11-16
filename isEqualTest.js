@@ -64,6 +64,7 @@ function runTests(testCases) {
             console.log(`❌`, description);
         }
     }
+    console.log();
 }
 
 runTests(primitiveTestCases);
