@@ -2,8 +2,12 @@ function areArrays(first, second) {
     return Array.isArray(first) !== Array.isArray(second);
 }
 
-function hasSameLengthObjects(first, second) {
-    return Object.keys(first).length !== Object.keys(second).length;
+function getObjectLenght(first) {
+    return Object.keys(first).length;
+}
+
+function areNotSameLengthObjects(first, second) {
+    return getObjectLenght(first) !== getObjectLenght(second);
 }
 
 function isEqual(first, second) {
@@ -11,11 +15,12 @@ function isEqual(first, second) {
 
     if (typeof first !== "object" || typeof second !== "object") return false;
 
-    if (hasSameLengthObjects(first, second)) return false;
+    if (areNotSameLengthObjects(first, second)) return false;
 
     if (areArrays(first, second)) return false;
 
     for (const key in first) {
+        if (!(key in second)) return false;
         if (!isEqual(first[key], second[key])) return false;
     }
 
@@ -25,4 +30,3 @@ function isEqual(first, second) {
 module.exports = {
     isEqual
 }
-

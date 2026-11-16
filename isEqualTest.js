@@ -61,17 +61,22 @@ const nestedObjectTestCases = {
 }
 
 function runTests(testCases) {
+    const count = testCases.cases.length;
     console.log();
     console.log(testCases.type);
 
     for (const [description, first, second, expected] of testCases.cases) {
         const result = isEqual(first, second);
-        if (result === expected) {
-            console.log(`✅`);
-        } else {
+        if (!(result === expected)) {
             console.log(`❌`, description);
+            count--;
         }
     }
+
+    if (count === testCases.cases.length)
+        console.log(`✅ all are working`);
+    else
+        console.log(`✅ other ${count} are working`);
 }
 
 runTests(primitiveTestCases);
