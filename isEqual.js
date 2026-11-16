@@ -18,7 +18,6 @@ function isEqual(first, second) {
             return true
         }
     }
-
     if (first !== second) {
         return false
     }
