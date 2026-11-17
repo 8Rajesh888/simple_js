@@ -2,12 +2,12 @@ function areArrays(first, second) {
     return Array.isArray(first) !== Array.isArray(second);
 }
 
-function getObjectLenght(first) {
+function getObjectLength(first) {
     return Object.keys(first).length;
 }
 
 function areNotSameLengthObjects(first, second) {
-    return getObjectLenght(first) !== getObjectLenght(second);
+    return getObjectLength(first) !== getObjectLength(second);
 }
 
 function isEqual(first, second) {

@@ -47,6 +47,8 @@ const objectTestCases = {
         ["same obj", { a: 1 }, { a: 1 }, true],
         ["diff obj", { a: 1 }, { a: 2 }, false],
         ["reversed obj", { a: 1, b: 2 }, { b: 2, a: 1 }, true],
+        ["a is first", { a: undefined }, { b: 1 }, false],
+        ["a is second", { b: 1 }, { a: undefined }, false],
     ]
 }
 
@@ -61,7 +63,8 @@ const nestedObjectTestCases = {
 }
 
 function runTests(testCases) {
-    const count = testCases.cases.length;
+    let count = testCases.cases.length;
+
     console.log();
     console.log(testCases.type);
 
